@@ -7,14 +7,14 @@
   <meta name="keywords" content="Kenya tours, safari, Maasai Mara, Diani Beach, Mount Kenya, cultural tours, adventure travel, Cotesa Tours" />
   <meta name="author" content="Cotesa Tours" />
   <title>Cotesa Tours - Discover Kenya's Wonders</title>
-  <link rel="stylesheet" href="style.css" />
-<script src="script.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
   <header>
     <nav id="main-nav">
+      <button id="nav-toggle" aria-label="Toggle navigation">☰</button>
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -22,12 +22,11 @@
         <li class="brand-name">Cotesa Tours</li>
         <li><a href="#guides">Guides</a></li>
         <li><a href="#resources">Resources</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <button id="nav-toggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
     </nav>
+    <div id="nav-overlay"></div>
   </header>
 
   <main>
@@ -235,7 +234,7 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq">
+    <section id="faq" class="faq">
       <h2>Frequently Asked Questions</h2>
       <div class="faq-list">
         <button class="accordion">How do I book a tour?</button>
@@ -306,7 +305,5 @@
   </footer>
 
   <script src="js/script.js"></script>
-<link rel="stylesheet" href="css/style.css">
-<script src="js/script.js"></script>
 </body>
 </html>
