@@ -1,309 +1,642 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cotesa Tours: Your trusted partner for unforgettable Kenyan adventures. Explore Maasai Mara, Diani Beach, Mount Kenya, and more with expert guides and custom itineraries." />
-  <meta name="keywords" content="Kenya tours, safari, Maasai Mara, Diani Beach, Mount Kenya, cultural tours, adventure travel, Cotesa Tours" />
-  <meta name="author" content="Cotesa Tours" />
-  <title>Cotesa Tours - Discover Kenya's Wonders</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-</head>
-<body>
-  <header>
-    <nav id="main-nav">
-      <button id="nav-toggle" aria-label="Toggle navigation">☰</button>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#tours">Tours</a></li>
-        <li class="brand-name">Cotesa Tours</li>
-        <li><a href="#guides">Guides</a></li>
-        <li><a href="#resources">Resources</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-    <div id="nav-overlay"></div>
-  </header>
+:root {
+  --primary: #00BFAE;    /* Vivid Teal - Kenyan coastal vibe */
+  --secondary: #FFB400;  /* Bright Sun Yellow - Savanna sunsets */
+  --accent: #FF4E50;     /* Vivid Coral Red - Maasai cultural hues */
+  --bg: #F9F9F9;         /* Clean White */
+  --text: #22223B;       /* Deep Navy */
+  --white: #fff;
+}
 
-  <main>
-    <!-- Hero Section with Video Background -->
-    <section id="home" class="hero">
-      <video autoplay muted loop class="hero-video">
-        <source src="assets/kenya-wildlife.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-content">
-        <h1>Discover Kenya with Cotesa Tours</h1>
-        <p>From Maasai Mara safaris to Diani Beach getaways, your adventure starts here.</p>
-        <a href="#tours" class="btn-primary">Explore Tours</a>
-      </div>
-    </section>
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+}
 
-    <!-- Search Bar -->
-    <section class="search-bar">
-      <h2>Find Your Perfect Adventure</h2>
-      <form id="tour-search" class="search-form">
-        <input type="text" id="search-input" placeholder="Search destinations, tours, or activities..." />
-        <select id="filter-type">
-          <option value="">All Activities</option>
-          <option value="safari">Safari</option>
-          <option value="beach">Beach Holidays</option>
-          <option value="cultural">Cultural Tours</option>
-          <option value="adventure">Adventure</option>
-        </select>
-        <select id="filter-price">
-          <option value="">All Prices</option>
-          <option value="budget">Budget</option>
-          <option value="midrange">Mid-Range</option>
-          <option value="luxury">Luxury</option>
-        </select>
-        <button type="submit" class="btn-primary">Search</button>
-      </form>
-    </section>
+header {
+  background: var(--primary);
+  color: var(--white);
+  padding: 1.2rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 2000; /* make sure nav is above other content */
+  box-shadow: 0 2px 12px rgba(0, 191, 174, 0.08);
+}
 
-    <!-- About Section -->
-    <section id="about" class="about">
-      <h2>About Cotesa Tours</h2>
-      <p>
-        Cotesa Tours is your gateway to Kenya’s breathtaking landscapes and vibrant cultures. From the iconic Maasai Mara to the serene beaches of Lamu, our expert guides craft personalized adventures that immerse you in the heart of Africa. Licensed by the Tourism Regulatory Authority of Kenya, we prioritize safety, authenticity, and unforgettable experiences.
-      </p>
-      <div class="certifications">
-        <img src="assets/tra-logo.png" alt="Tourism Regulatory Authority" />
-        <p>Certified by the Tourism Regulatory Authority of Kenya</p>
-      </div>
-    </section>
+/* Default nav styles */
+#main-nav {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    <!-- Interactive Map -->
-    <section id="map-section" class="map-section">
-      <h2>Explore Kenya’s Parks & Reserves</h2>
-      <div id="map" style="height: 400px;"></div>
-      <p class="map-info">Click on markers to discover Kenya’s top destinations!</p>
-    </section>
+#main-nav ul {
+  display: flex;
+  gap: 20px;
+  z-index: 2001; /* keeps dropdown visible */
+  margin: 0 auto;
+  align-items: center;
+  list-style: none;
+  position: relative;
+}
 
-    <!-- Tours Section -->
-    <section id="tours" class="card-section">
-      <h2>Explore Our Tours</h2>
-      <div class="card-grid">
-        <div class="card" data-type="safari" data-price="midrange">
-          <img src="assets/maasai-mara.jpg" alt="Maasai Mara Safari" />
-          <h3>3-Day Maasai Mara Safari</h3>
-          <p>Experience the Great Migration (July–October) and spot the Big Five. Includes accommodation, meals, and guided game drives.</p>
-          <p><strong>Price:</strong> $1,200 per person</p>
-          <a href="#booking" class="btn-primary">Book Now</a>
-          <a href="#maasai-mara" class="btn-secondary">Learn More</a>
-        </div>
-        <div class="card" data-type="beach" data-price="luxury">
-          <img src="assets/diani-beach.jpg" alt="Diani Beach Holiday" />
-          <h3>5-Day Diani Beach Holiday</h3>
-          <p>Relax on pristine beaches with snorkeling, diving, and Swahili cultural tours. Includes luxury resort stay.</p>
-          <p><strong>Price:</strong> $1,800 per person</p>
-          <a href="#booking" class="btn-primary">Book Now</a>
-          <a href="#diani" class="btn-secondary">Learn More</a>
-        </div>
-        <div class="card" data-type="cultural" data-price="budget">
-          <img src="assets/lamu-culture.jpg" alt="Lamu Cultural Tour" />
-          <h3>4-Day Lamu Cultural Tour</h3>
-          <p>Explore the historic Lamu Archipelago, visit Swahili villages, and attend the Lamu Cultural Festival (November).</p>
-          <p><strong>Price:</strong> $900 per person</p>
-          <a href="#booking" class="btn-primary">Book Now</a>
-          <a href="#lamu" class="btn-secondary">Learn More</a>
-        </div>
-      </div>
-    </section>
+#main-nav ul .brand-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  background: var(--secondary);
+  padding: 0.4rem 1.5rem;
+  border-radius: 2rem;
+  margin: 0 2rem;
+  letter-spacing: 1.5px;
+  pointer-events: none;
+  box-shadow: 0 2px 10px rgba(255,180,0,0.09);
+  border: 2px solid var(--accent);
+}
 
-    <!-- Booking Section -->
-    <section id="booking" class="booking">
-      <h2>Book Your Adventure</h2>
-      <form class="booking-form">
-        <label>
-          Full Name
-          <input type="text" required />
-        </label>
-        <label>
-          Email
-          <input type="email" required />
-        </label>
-        <label>
-          Tour Package
-          <select required>
-            <option value="">Select a Tour</option>
-            <option value="maasai-mara">3-Day Maasai Mara Safari</option>
-            <option value="diani">5-Day Diani Beach Holiday</option>
-            <option value="lamu">4-Day Lamu Cultural Tour</option>
-          </select>
-        </label>
-        <label>
-          Travel Date
-          <input type="date" required />
-        </label>
-        <label>
-          Number of Travelers
-          <input type="number" min="1" required />
-        </label>
-        <label>
-          Special Requests
-          <textarea></textarea>
-        </label>
-        <div class="payment-options">
-          <h3>Payment Options</h3>
-          <label><input type="radio" name="payment" value="mpesa" /> Mpesa</label>
-          <label><input type="radio" name="payment" value="card" /> Credit/Debit Card</label>
-          <label><input type="radio" name="payment" value="paypal" /> PayPal</label>
-        </div>
-        <button type="submit" class="btn-primary">Submit Booking</button>
-      </form>
-    </section>
+#main-nav ul li a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
 
-    <!-- Guides Section -->
-    <section id="guides" class="guides">
-      <h2>Meet Our Expert Guides</h2>
-      <div class="card-grid">
-        <div class="card">
-          <img src="assets/guide1.jpg" alt="Guide Job Saidi" />
-          <h3>Job Saidi</h3>
-          <p>Safari Specialist with over 5 years of experience. Speaks English, Swahili, and Maasai.</p>
-        </div>
-        <div class="card">
-          <img src="assets/guide2.jpg" alt="Guide Leah Sanyire" />
-          <h3>Leah Sanyire</h3>
-          <p>Cultural Expert passionate about Kenya’s heritage. Fluent in English, Swahili, and French.</p>
-        </div>
-      </div>
-    </section>
+#main-nav ul li a:hover {
+  background: var(--accent);
+  color: var(--white);
+}
 
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-      <h2>What Our Travelers Say</h2>
-      <div class="testimonial-grid">
-        <blockquote>
-          “Cotesa Tours made our safari seamless and magical! The guides were knowledgeable and friendly.”
-          <span>— Aisha M., Nairobi</span>
-        </blockquote>
-        <blockquote>
-          “Our beach holiday in Diani was unforgettable. Every detail was perfectly organized.”
-          <span>— John K., London</span>
-        </blockquote>
-        <div class="tripadvisor">
-          <a href="https://www.tripadvisor.com" target="_blank">See More on TripAdvisor</a>
-        </div>
-      </div>
-    </section>
+#nav-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  z-index: 2001;
+  flex-direction: column;
+  gap: 4px;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-    <!-- Resources Section -->
-    <section id="resources" class="resources">
-      <h2>Travel Resources</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Wildlife Migration Calendar</h3>
-          <p>Plan your Maasai Mara safari during the Great Migration (July–October).</p>
-          <a href="#migration" class="btn-secondary">Learn More</a>
-        </div>
-        <div class="card">
-          <h3>Local Events</h3>
-          <p>Discover events like the Lamu Cultural Festival and Maralal Camel Derby.</p>
-          <a href="#events" class="btn-secondary">Explore</a>
-        </div>
-        <div class="card">
-          <h3>Travel Safety</h3>
-          <p>COVID-19 protocols, travel insurance, and safety tips for your journey.</p>
-          <a href="#safety" class="btn-secondary">Explore</a>
-        </div>
-      </div>
-    </section>
+#nav-toggle span {
+  width: 24px;
+  height: 3px;
+  background: var(--white);
+  border-radius: 2px;
+}
 
-    <!-- Blog Section -->
-    <section id="blog" class="blog">
-      <h2>Travel Blog & Insider Tips</h2>
-      <div class="card-grid">
-        <div class="card">
-          <img src="assets/blog1.jpg" alt="Maasai Mara Blog" />
-          <h3>Top 5 Tips for a Maasai Mara Safari</h3>
-          <p>Learn how to prepare for an epic wildlife adventure.</p>
-          <a href="#blog1" class="btn-secondary">Read More</a>
-        </div>
-        <div class="card">
-          <img src="assets/blog2.jpg" alt="Swahili Culture Blog" />
-          <h3>Exploring Swahili Culture in Lamu</h3>
-          <p>Discover the history and traditions of Kenya’s coast.</p>
-          <a href="#blog2" class="btn-secondary">Read More</a>
-        </div>
-      </div>
-    </section>
+/* Overlay (hidden by default) */
+#nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 2000;
+}
 
-    <!-- FAQ Section -->
-    <section id="faq" class="faq">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-list">
-        <button class="accordion">How do I book a tour?</button>
-        <div class="panel">
-          <p>Visit our booking section, select your tour, and fill out the form. You’ll receive a confirmation email with an e-ticket.</p>
-        </div>
-        <button class="accordion">Are tours customizable?</button>
-        <div class="panel">
-          <p>Yes! Contact us to tailor your itinerary to your preferences and schedule.</p>
-        </div>
-        <button class="accordion">Is it safe to travel in Kenya?</button>
-        <div class="panel">
-          <p>We follow strict safety protocols, including COVID-19 measures, and our guides are trained to ensure your safety.</p>
-        </div>
-        <button class="accordion">What’s included in the packages?</button>
-        <div class="panel">
-          <p>Packages include accommodation, meals, transport, park fees, and guided activities. Check tour details for specifics.</p>
-        </div>
-      </div>
-    </section>
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+}
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-      <h2>Contact Us</h2>
-      <div class="contact-details">
-        <div>
-          <p><strong>Email:</strong> <a href="mailto:info@cotesatours.co.ke">info@cotesatours.co.ke</a></p>
-          <p><strong>Phone:</strong> <a href="tel:+254790005392">+254 790005392</a></p>
-          <p><strong>WhatsApp:</strong> <a href="https://wa.me/+254790005392" target="_blank">Chat with us</a></p>
-          <p><strong>Address:</strong> 804 Ruiru, Nairobi, Kenya</p>
-          <div id="contact-map" style="height: 200px; margin-top: 1rem;"></div>
-        </div>
-        <form class="contact-form">
-          <label>
-            Name
-            <input type="text" required />
-          </label>
-          <label>
-            Email
-            <input type="email" required />
-          </label>
-          <label>
-            Message
-            <textarea required></textarea>
-          </label>
-          <button type="submit" class="btn-primary">Send Message</button>
-        </form>
-      </div>
-    </section>
-  </main>
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
 
-  <footer>
-    <div class="footer-links">
-      <a href="https://www.instagram.com/cotesatours" target="_blank">Instagram</a>
-      <a href="https://www.facebook.com/cotesatours" target="_blank">Facebook</a>
-      <a href="https://www.tiktok.com/@cotesatours" target="_blank">TikTok</a>
-    </div>
-    <div class="newsletter">
-      <h3>Subscribe to Our Newsletter</h3>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Enter your email" required />
-        <button type="submit" class="btn-primary">Subscribe</button>
-      </form>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 Cotesa Tours. All rights reserved.</p>
-    </div>
-  </footer>
+.hero-content {
+  background: rgba(0, 191, 174, 0.7);
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 800px;
+}
 
-  <script src="js/script.js"></script>
-</body>
-</html>
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Search Bar */
+.search-bar {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.search-form {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search-form input,
+.search-form select {
+  padding: 0.8rem;
+  border-radius: 0.6rem;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  min-width: 200px;
+}
+
+.search-form button {
+  align-self: center;
+}
+
+/* Map Section */
+.map-section {
+  text-align: center;
+}
+
+.map-info {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* Booking Section */
+.booking {
+  background: var(--white);
+  border-radius: 1.5rem;
+  padding: 3rem;
+  box-shadow: 0 4px 20px rgba(34,34,59,0.05);
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.booking-form label {
+  font-weight: 500;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.payment-options {
+  margin: 1rem 0;
+}
+
+.payment-options label {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+/* Blog Section */
+.blog .card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Certifications */
+.certifications {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.certifications img {
+  max-width: 150px;
+  margin-bottom: 1rem;
+}
+
+/* Newsletter */
+.newsletter {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.newsletter-form input {
+  padding: 0.8rem;
+  border-radius: 0.6rem;
+  border: 1px solid #ddd;
+  min-width: 200px;
+}
+
+/* Existing Styles (Updated for Consistency) */
+.overview {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+  color: var(--accent);
+  border-radius: 1.5rem;
+  padding: 3.5rem 2rem;
+  max-width: 700px;
+  margin: 3rem auto 2.5rem auto;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(0,191,174,0.10);
+  border: 2px solid var(--accent);
+  animation: fadeIn 1.2s;
+}
+
+.overview h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.2rem;
+  color: var(--accent);
+}
+
+.overview h2 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 1.6rem;
+}
+
+.overview p {
+  font-size: 1.15rem;
+  margin-bottom: 2.3rem;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--white);
+  padding: 0.85rem 2rem;
+  border-radius: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  border: none;
+  box-shadow: 0 2px 12px rgba(255,78,80,0.10);
+}
+
+.btn-primary:hover {
+  background: var(--secondary);
+  color: var(--accent);
+  box-shadow: 0 4px 18px rgba(255,180,0,0.15);
+}
+
+section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+h2 {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.card-section h2, .resources h2, .guides h2 {
+  text-align: center;
+}
+
+.card-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(34,34,59,0.05);
+  padding: 1.8rem;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 2px solid var(--primary);
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 6px 26px rgba(0,191,174,0.13);
+  border-color: var(--accent);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  margin-bottom: 1.2rem;
+}
+
+.guides .card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.btn-secondary {
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.75rem 1.7rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1.3rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover {
+  background: var(--secondary);
+  color: var(--accent);
+}
+
+.testimonials {
+  background: linear-gradient(45deg, var(--primary) 0%, var(--accent) 100%);
+  color: var(--white);
+  border-radius: 1.5rem;
+  padding: 3rem;
+  margin-bottom: 3rem;
+}
+
+.testimonial-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.testimonial-grid blockquote {
+  background: rgba(255,255,255,0.10);
+  border-left: 5px solid var(--secondary);
+  padding: 1.5rem 2rem;
+  border-radius: 0.75rem;
+  font-style: italic;
+}
+
+.testimonial-grid span {
+  display: block;
+  margin-top: 0.7rem;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.tripadvisor a {
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.tripadvisor a:hover {
+  color: var(--accent);
+}
+
+.faq {
+  background: var(--white);
+  border-radius: 1.5rem;
+  padding: 3rem;
+  box-shadow: 0 4px 20px rgba(34,34,59,0.05);
+}
+
+.faq-list {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.accordion {
+  background-color: var(--secondary);
+  color: var(--text);
+  cursor: pointer;
+  padding: 1.1rem 1.6rem;
+  width: 100%;
+  border: none;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 1rem;
+  margin-bottom: 0.5rem;
+  transition: background 0.2s;
+}
+
+.accordion:hover, .accordion.active {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.accordion:after {
+  content: '\002B';
+  color: var(--accent);
+  font-weight: bold;
+  float: right;
+  margin-left: 1rem;
+}
+
+.accordion.active:after {
+  content: \"\2212\";
+}
+
+.panel {
+  padding: 0 1.6rem;
+  background-color: var(--white);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.panel p {
+  margin: 1rem 0;
+}
+
+.contact {
+  background: linear-gradient(45deg, var(--secondary) 20%, var(--primary) 100%);
+  color: var(--text);
+  border-radius: 1.5rem;
+  padding: 3rem;
+}
+
+.contact-details {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.contact-details div {
+  flex: 1 1 300px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 1.2rem;
+  min-width: 300px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid #ddd;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+footer {
+  background: var(--primary);
+  color: var(--white);
+  padding: 2.5rem 0;
+  text-align: center;
+}
+
+.footer-links a {
+  color: var(--white);
+  margin: 0 1.2rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* Responsive Styles */
+@media (min-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .testimonial-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  #nav-toggle {
+    display: block;
+  }
+
+  #main-nav ul {
+    flex-direction: column;
+    background: var(--primary);
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 2002;
+
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+  }
+
+  #main-nav ul li {
+    padding: 0.8rem 1rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  #main-nav ul.active {
+    max-height: 500px;
+    opacity: 1;
+    display: flex;
+  }
+
+  /* Animate items in when active */
+  #main-nav ul.active li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger effect */
+  #main-nav ul.active li:nth-child(1) { transition-delay: 0.1s; }
+  #main-nav ul.active li:nth-child(2) { transition-delay: 0.2s; }
+  #main-nav ul.active li:nth-child(3) { transition-delay: 0.3s; }
+  #main-nav ul.active li:nth-child(4) { transition-delay: 0.4s; }
+  #main-nav ul.active li:nth-child(5) { transition-delay: 0.5s; }
+
+  /* Show overlay when menu is active */
+  #nav-overlay.active {
+    display: block;
+  }
+
+  .hero {
+    height: 60vh;
+  }
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  .search-form {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-details {
+    flex-direction: column;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
