@@ -21,12 +21,12 @@ header {
   padding: 1.2rem 0;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 2000; /* make sure nav is above other content */
   box-shadow: 0 2px 12px rgba(0, 191, 174, 0.08);
 }
 
-#main-nav {
-  max-width: 1200px;
+#main-nav ul {
+  z-index: 2001; /* keeps dropdown visible */
   margin: 0 auto;
   display: flex;
   justify-content: center;
