@@ -6,15 +6,23 @@
   <meta name="description" content="Cotesa Tours: Your trusted partner for unforgettable Kenyan adventures. Explore Maasai Mara, Diani Beach, Mount Kenya, and more with expert guides and custom itineraries." />
   <meta name="keywords" content="Kenya tours, safari, Maasai Mara, Diani Beach, Mount Kenya, cultural tours, adventure travel, Cotesa Tours" />
   <meta name="author" content="Cotesa Tours" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Cotesa Tours - Discover Kenya's Wonders" />
+  <meta property="og:description" content="Explore Kenya with Cotesa Tours: Maasai Mara safaris, Diani Beach getaways, and more with expert guides." />
+  <meta property="og:image" content="assets/kenya-wildlife.jpg" />
+  <meta property="og:url" content="https://cotesatours.co.ke" />
+  <meta name="twitter:card" content="summary_large_image" />
   <title>Cotesa Tours - Discover Kenya's Wonders</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="preload" href="assets/kenya-wildlife.mp4" as="video" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <script src="js/script.js" defer></script>
 </head>
 <body>
-  <header>
-    <nav id="main-nav">
-      <button id="nav-toggle" aria-label="Toggle navigation">☰</button>
+  <header role="banner">
+    <nav id="main-nav" role="navigation" aria-label="Main">
+      <button id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -26,41 +34,41 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <div id="nav-overlay"></div>
+    <div id="nav-overlay" aria-hidden="true"></div>
   </header>
 
-  <main>
+  <main role="main">
     <!-- Hero Section with Video Background -->
     <section id="home" class="hero">
-      <video autoplay muted loop class="hero-video">
+      <video autoplay muted loop class="hero-video" aria-hidden="true">
         <source src="assets/kenya-wildlife.mp4" type="video/mp4" />
       </video>
       <div class="hero-content">
         <h1>Discover Kenya with Cotesa Tours</h1>
         <p>From Maasai Mara safaris to Diani Beach getaways, your adventure starts here.</p>
-        <a href="#tours" class="btn-primary">Explore Tours</a>
+        <a href="#tours" class="btn-primary" aria-label="Explore available tours">Explore Tours</a>
       </div>
     </section>
 
     <!-- Search Bar -->
     <section class="search-bar">
       <h2>Find Your Perfect Adventure</h2>
-      <form id="tour-search" class="search-form">
-        <input type="text" id="search-input" placeholder="Search destinations, tours, or activities..." />
-        <select id="filter-type">
+      <form id="tour-search" class="search-form" role="search">
+        <input type="text" id="search-input" placeholder="Search destinations, tours, or activities..." aria-label="Search tours" />
+        <select id="filter-type" aria-label="Filter by activity type">
           <option value="">All Activities</option>
           <option value="safari">Safari</option>
           <option value="beach">Beach Holidays</option>
           <option value="cultural">Cultural Tours</option>
           <option value="adventure">Adventure</option>
         </select>
-        <select id="filter-price">
+        <select id="filter-price" aria-label="Filter by price range">
           <option value="">All Prices</option>
           <option value="budget">Budget</option>
           <option value="midrange">Mid-Range</option>
           <option value="luxury">Luxury</option>
         </select>
-        <button type="submit" class="btn-primary">Search</button>
+        <button type="submit" class="btn-primary" aria-label="Submit search">Search</button>
       </form>
     </section>
 
@@ -71,7 +79,7 @@
         Cotesa Tours is your gateway to Kenya’s breathtaking landscapes and vibrant cultures. From the iconic Maasai Mara to the serene beaches of Lamu, our expert guides craft personalized adventures that immerse you in the heart of Africa. Licensed by the Tourism Regulatory Authority of Kenya, we prioritize safety, authenticity, and unforgettable experiences.
       </p>
       <div class="certifications">
-        <img src="assets/tra-logo.png" alt="Tourism Regulatory Authority" />
+        <img src="assets/tra-logo.png" alt="Tourism Regulatory Authority of Kenya certification logo" />
         <p>Certified by the Tourism Regulatory Authority of Kenya</p>
       </div>
     </section>
@@ -79,37 +87,37 @@
     <!-- Interactive Map -->
     <section id="map-section" class="map-section">
       <h2>Explore Kenya’s Parks & Reserves</h2>
-      <div id="map" style="height: 400px;"></div>
+      <div id="map" style="height: 400px;" role="application" aria-label="Interactive map of Kenya's parks and reserves"></div>
       <p class="map-info">Click on markers to discover Kenya’s top destinations!</p>
     </section>
 
     <!-- Tours Section -->
     <section id="tours" class="card-section">
       <h2>Explore Our Tours</h2>
-      <div class="card-grid">
-        <div class="card" data-type="safari" data-price="midrange">
-          <img src="assets/maasai-mara.jpg" alt="Maasai Mara Safari" />
+      <div class="card-grid" role="list">
+        <div class="card" data-type="safari" data-price="midrange" role="listitem">
+          <img src="assets/maasai-mara.jpg" alt="Scenic view of Maasai Mara during a safari" />
           <h3>3-Day Maasai Mara Safari</h3>
           <p>Experience the Great Migration (July–October) and spot the Big Five. Includes accommodation, meals, and guided game drives.</p>
           <p><strong>Price:</strong> $1,200 per person</p>
-          <a href="#booking" class="btn-primary">Book Now</a>
-          <a href="#maasai-mara" class="btn-secondary">Learn More</a>
+          <a href="#booking" class="btn-primary" aria-label="Book 3-Day Maasai Mara Safari">Book Now</a>
+          <a href="#maasai-mara" class="btn-secondary" aria-label="Learn more about Maasai Mara Safari">Learn More</a>
         </div>
-        <div class="card" data-type="beach" data-price="luxury">
-          <img src="assets/diani-beach.jpg" alt="Diani Beach Holiday" />
+        <div class="card" data-type="beach" data-price="luxury" role="listitem">
+          <img src="assets/diani-beach.jpg" alt="Beautiful Diani Beach with turquoise waters" />
           <h3>5-Day Diani Beach Holiday</h3>
           <p>Relax on pristine beaches with snorkeling, diving, and Swahili cultural tours. Includes luxury resort stay.</p>
           <p><strong>Price:</strong> $1,800 per person</p>
-          <a href="#booking" class="btn-primary">Book Now</a>
-          <a href="#diani" class="btn-secondary">Learn More</a>
+          <a href="#booking" class="btn-primary" aria-label="Book 5-Day Diani Beach Holiday">Book Now</a>
+          <a href="#diani" class="btn-secondary" aria-label="Learn more about Diani Beach Holiday">Learn More</a>
         </div>
-        <div class="card" data-type="cultural" data-price="budget">
-          <img src="assets/lamu-culture.jpg" alt="Lamu Cultural Tour" />
+        <div class="card" data-type="cultural" data-price="budget" role="listitem">
+          <img src="assets/lamu-culture.jpg" alt="Cultural scene from Lamu Archipelago" />
           <h3>4-Day Lamu Cultural Tour</h3>
           <p>Explore the historic Lamu Archipelago, visit Swahili villages, and attend the Lamu Cultural Festival (November).</p>
           <p><strong>Price:</strong> $900 per person</p>
-          <a href="#booking" class="btn-primary">Book Now</a>
-          <a href="#lamu" class="btn-secondary">Learn More</a>
+          <a href="#booking" class="btn-primary" aria-label="Book 4-Day Lamu Cultural Tour">Book Now</a>
+          <a href="#lamu" class="btn-secondary" aria-label="Learn more about Lamu Cultural Tour">Learn More</a>
         </div>
       </div>
     </section>
@@ -117,57 +125,57 @@
     <!-- Booking Section -->
     <section id="booking" class="booking">
       <h2>Book Your Adventure</h2>
-      <form class="booking-form">
-        <label>
-          Full Name
-          <input type="text" required />
-        </label>
-        <label>
-          Email
-          <input type="email" required />
-        </label>
-        <label>
-          Tour Package
-          <select required>
+      <form class="booking-form" novalidate>
+        <div>
+          <label for="full-name">Full Name</label>
+          <input type="text" id="full-name" name="full-name" required aria-required="true" />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required aria-required="true" />
+        </div>
+        <div>
+          <label for="tour-package">Tour Package</label>
+          <select id="tour-package" name="tour-package" required aria-required="true">
             <option value="">Select a Tour</option>
             <option value="maasai-mara">3-Day Maasai Mara Safari</option>
             <option value="diani">5-Day Diani Beach Holiday</option>
             <option value="lamu">4-Day Lamu Cultural Tour</option>
           </select>
-        </label>
-        <label>
-          Travel Date
-          <input type="date" required />
-        </label>
-        <label>
-          Number of Travelers
-          <input type="number" min="1" required />
-        </label>
-        <label>
-          Special Requests
-          <textarea></textarea>
-        </label>
+        </div>
+        <div>
+          <label for="travel-date">Travel Date</label>
+          <input type="date" id="travel-date" name="travel-date" required aria-required="true" />
+        </div>
+        <div>
+          <label for="travelers">Number of Travelers</label>
+          <input type="number" id="travelers" name="travelers" min="1" required aria-required="true" />
+        </div>
+        <div>
+          <label for="special-requests">Special Requests</label>
+          <textarea id="special-requests" name="special-requests" aria-required="false"></textarea>
+        </div>
         <div class="payment-options">
           <h3>Payment Options</h3>
-          <label><input type="radio" name="payment" value="mpesa" /> Mpesa</label>
+          <label><input type="radio" name="payment" value="mpesa" required /> Mpesa</label>
           <label><input type="radio" name="payment" value="card" /> Credit/Debit Card</label>
           <label><input type="radio" name="payment" value="paypal" /> PayPal</label>
         </div>
-        <button type="submit" class="btn-primary">Submit Booking</button>
+        <button type="submit" class="btn-primary" aria-label="Submit booking request">Submit Booking</button>
       </form>
     </section>
 
     <!-- Guides Section -->
     <section id="guides" class="guides">
       <h2>Meet Our Expert Guides</h2>
-      <div class="card-grid">
-        <div class="card">
-          <img src="assets/guide1.jpg" alt="Guide Job Saidi" />
+      <div class="card-grid" role="list">
+        <div class="card" role="listitem">
+          <img src="assets/guide1.jpg" alt="Portrait of Guide Job Saidi" />
           <h3>Job Saidi</h3>
           <p>Safari Specialist with over 5 years of experience. Speaks English, Swahili, and Maasai.</p>
         </div>
-        <div class="card">
-          <img src="assets/guide2.jpg" alt="Guide Leah Sanyire" />
+        <div class="card" role="listitem">
+          <img src="assets/guide2.jpg" alt="Portrait of Guide Leah Sanyire" />
           <h3>Leah Sanyire</h3>
           <p>Cultural Expert passionate about Kenya’s heritage. Fluent in English, Swahili, and French.</p>
         </div>
@@ -177,17 +185,17 @@
     <!-- Testimonials Section -->
     <section class="testimonials">
       <h2>What Our Travelers Say</h2>
-      <div class="testimonial-grid">
-        <blockquote>
+      <div class="testimonial-grid" role="list">
+        <blockquote role="listitem">
           “Cotesa Tours made our safari seamless and magical! The guides were knowledgeable and friendly.”
           <span>— Aisha M., Nairobi</span>
         </blockquote>
-        <blockquote>
+        <blockquote role="listitem">
           “Our beach holiday in Diani was unforgettable. Every detail was perfectly organized.”
           <span>— John K., London</span>
         </blockquote>
-        <div class="tripadvisor">
-          <a href="https://www.tripadvisor.com" target="_blank">See More on TripAdvisor</a>
+        <div class="tripadvisor" role="listitem">
+          <a href="https://www.tripadvisor.com" target="_blank" aria-label="Visit TripAdvisor for more reviews">See More on TripAdvisor</a>
         </div>
       </div>
     </section>
@@ -195,21 +203,21 @@
     <!-- Resources Section -->
     <section id="resources" class="resources">
       <h2>Travel Resources</h2>
-      <div class="card-grid">
-        <div class="card">
+      <div class="card-grid" role="list">
+        <div class="card" role="listitem">
           <h3>Wildlife Migration Calendar</h3>
           <p>Plan your Maasai Mara safari during the Great Migration (July–October).</p>
-          <a href="#migration" class="btn-secondary">Learn More</a>
+          <a href="#migration" class="btn-secondary" aria-label="Learn more about wildlife migration calendar">Learn More</a>
         </div>
-        <div class="card">
+        <div class="card" role="listitem">
           <h3>Local Events</h3>
           <p>Discover events like the Lamu Cultural Festival and Maralal Camel Derby.</p>
-          <a href="#events" class="btn-secondary">Explore</a>
+          <a href="#events" class="btn-secondary" aria-label="Explore local events">Explore</a>
         </div>
-        <div class="card">
+        <div class="card" role="listitem">
           <h3>Travel Safety</h3>
           <p>COVID-19 protocols, travel insurance, and safety tips for your journey.</p>
-          <a href="#safety" class="btn-secondary">Explore</a>
+          <a href="#safety" class="btn-secondary" aria-label="Explore travel safety tips">Explore</a>
         </div>
       </div>
     </section>
@@ -217,18 +225,18 @@
     <!-- Blog Section -->
     <section id="blog" class="blog">
       <h2>Travel Blog & Insider Tips</h2>
-      <div class="card-grid">
-        <div class="card">
-          <img src="assets/blog1.jpg" alt="Maasai Mara Blog" />
+      <div class="card-grid" role="list">
+        <div class="card" role="listitem">
+          <img src="assets/blog1.jpg" alt="Scenic view from a Maasai Mara safari" />
           <h3>Top 5 Tips for a Maasai Mara Safari</h3>
           <p>Learn how to prepare for an epic wildlife adventure.</p>
-          <a href="#blog1" class="btn-secondary">Read More</a>
+          <a href="#blog1" class="btn-secondary" aria-label="Read more about Maasai Mara safari tips">Read More</a>
         </div>
-        <div class="card">
-          <img src="assets/blog2.jpg" alt="Swahili Culture Blog" />
+        <div class="card" role="listitem">
+          <img src="assets/blog2.jpg" alt="Cultural scene from Lamu" />
           <h3>Exploring Swahili Culture in Lamu</h3>
           <p>Discover the history and traditions of Kenya’s coast.</p>
-          <a href="#blog2" class="btn-secondary">Read More</a>
+          <a href="#blog2" class="btn-secondary" aria-label="Read more about Swahili culture in Lamu">Read More</a>
         </div>
       </div>
     </section>
@@ -236,20 +244,20 @@
     <!-- FAQ Section -->
     <section id="faq" class="faq">
       <h2>Frequently Asked Questions</h2>
-      <div class="faq-list">
-        <button class="accordion">How do I book a tour?</button>
+      <div class="faq-list" role="list">
+        <button class="accordion" aria-expanded="false">How do I book a tour?</button>
         <div class="panel">
           <p>Visit our booking section, select your tour, and fill out the form. You’ll receive a confirmation email with an e-ticket.</p>
         </div>
-        <button class="accordion">Are tours customizable?</button>
+        <button class="accordion" aria-expanded="false">Are tours customizable?</button>
         <div class="panel">
           <p>Yes! Contact us to tailor your itinerary to your preferences and schedule.</p>
         </div>
-        <button class="accordion">Is it safe to travel in Kenya?</button>
+        <button class="accordion" aria-expanded="false">Is it safe to travel in Kenya?</button>
         <div class="panel">
           <p>We follow strict safety protocols, including COVID-19 measures, and our guides are trained to ensure your safety.</p>
         </div>
-        <button class="accordion">What’s included in the packages?</button>
+        <button class="accordion" aria-expanded="false">What’s included in the packages?</button>
         <div class="panel">
           <p>Packages include accommodation, meals, transport, park fees, and guided activities. Check tour details for specifics.</p>
         </div>
@@ -261,49 +269,47 @@
       <h2>Contact Us</h2>
       <div class="contact-details">
         <div>
-          <p><strong>Email:</strong> <a href="mailto:info@cotesatours.co.ke">info@cotesatours.co.ke</a></p>
-          <p><strong>Phone:</strong> <a href="tel:+254790005392">+254 790005392</a></p>
-          <p><strong>WhatsApp:</strong> <a href="https://wa.me/+254790005392" target="_blank">Chat with us</a></p>
+          <p><strong>Email:</strong> <a href="mailto:info@cotesatours.co.ke" aria-label="Email Cotesa Tours">info@cotesatours.co.ke</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+254790005392" aria-label="Call Cotesa Tours">+254 790005392</a></p>
+          <p><strong>WhatsApp:</strong> <a href="https://wa.me/+254790005392" target="_blank" aria-label="Chat with Cotesa Tours on WhatsApp">Chat with us</a></p>
           <p><strong>Address:</strong> 804 Ruiru, Nairobi, Kenya</p>
-          <div id="contact-map" style="height: 200px; margin-top: 1rem;"></div>
+          <div id="contact-map" style="height: 200px; margin-top: 1rem;" role="application" aria-label="Map of Cotesa Tours office location"></div>
         </div>
-        <form class="contact-form">
-          <label>
-            Name
-            <input type="text" required />
-          </label>
-          <label>
-            Email
-            <input type="email" required />
-          </label>
-          <label>
-            Message
-            <textarea required></textarea>
-          </label>
-          <button type="submit" class="btn-primary">Send Message</button>
+        <form class="contact-form" novalidate>
+          <div>
+            <label for="contact-name">Name</label>
+            <input type="text" id="contact-name" name="contact-name" required aria-required="true" />
+          </div>
+          <div>
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" name="contact-email" required aria-required="true" />
+          </div>
+          <div>
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="contact-message" required aria-required="true"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" aria-label="Send contact message">Send Message</button>
         </form>
       </div>
     </section>
   </main>
 
-  <footer>
+  <footer role="contentinfo">
     <div class="footer-links">
-      <a href="https://www.instagram.com/cotesatours" target="_blank">Instagram</a>
-      <a href="https://www.facebook.com/cotesatours" target="_blank">Facebook</a>
-      <a href="https://www.tiktok.com/@cotesatours" target="_blank">TikTok</a>
+      <a href="https://www.instagram.com/cotesatours" target="_blank" aria-label="Visit Cotesa Tours on Instagram">Instagram</a>
+      <a href="https://www.facebook.com/cotesatours" target="_blank" aria-label="Visit Cotesa Tours on Facebook">Facebook</a>
+      <a href="https://www.tiktok.com/@cotesatours" target="_blank" aria-label="Visit Cotesa Tours on TikTok">TikTok</a>
     </div>
     <div class="newsletter">
       <h3>Subscribe to Our Newsletter</h3>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Enter your email" required />
-        <button type="submit" class="btn-primary">Subscribe</button>
+      <form class="newsletter-form" novalidate>
+        <input type="email" placeholder="Enter your email" id="newsletter-email" name="newsletter-email" required aria-required="true" aria-label="Enter email to subscribe" />
+        <button type="submit" class="btn-primary" aria-label="Subscribe to newsletter">Subscribe</button>
       </form>
     </div>
     <div class="footer-bottom">
       <p>© 2025 Cotesa Tours. All rights reserved.</p>
     </div>
   </footer>
-
-  <script src="js/script.js"></script>
 </body>
 </html>
